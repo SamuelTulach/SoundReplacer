@@ -13,13 +13,6 @@ namespace SoundReplacer
     {
         public override string ResourceName => string.Join(".", GetType().Namespace, GetType().Name);
 
-        [UIValue("enabled")]
-        protected bool SettingsEnabled
-        {
-            get => Plugin.CurrentConfig.Enabled;
-            set => Plugin.CurrentConfig.Enabled = value;
-        }
-
         [UIValue("good-hitsound-list")]
         public List<object> SettingsGoodHitSoundList = new List<object>(SoundLoader.GlobalSoundList);
 

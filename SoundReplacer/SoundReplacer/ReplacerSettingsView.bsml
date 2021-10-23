@@ -1,6 +1,5 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
   <vertical vertical-fit="PreferredSize" spacing="2">
-    <bool-setting text="Enable" value="enabled" apply-on-change="true" />
     <dropdown-list-setting options="good-hitsound-list" value="good-hitsound" text="Good hit sound" apply-on-change="true" />
     <dropdown-list-setting options="bad-hitsound-list" value="bad-hitsound" text="Bad hit sound" apply-on-change="true" />
     <dropdown-list-setting options="menu-music-list" value="menu-music" text="Menu music" apply-on-change="true" />

@@ -8,8 +8,6 @@ namespace SoundReplacer
 {
     public class PluginConfig
     {
-        public bool Enabled = true;
-
         public string GoodHitSound = "Default";
         public string BadHitSound = "Default";
 
