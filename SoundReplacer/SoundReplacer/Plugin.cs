@@ -41,7 +41,7 @@ namespace SoundReplacer
         [OnExit]
         public void OnApplicationQuit()
         {
-            // TODO: record tutorial video
+            /**/
         }
     }
 }
