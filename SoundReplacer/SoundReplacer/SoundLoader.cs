@@ -28,10 +28,12 @@ namespace SoundReplacer
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
-                if (fileInfo.Extension != ".ogg")
-                    continue;
-
-                GlobalSoundList.Add(fileInfo.Name);
+                if (fileInfo.Extension == ".ogg" ||
+                    fileInfo.Extension == ".mp3" ||
+                    fileInfo.Extension == ".wav")
+                {
+                    GlobalSoundList.Add(fileInfo.Name);
+                }
             }
         }
 
@@ -42,12 +44,29 @@ namespace SoundReplacer
             return fileInfo.FullName;
         }
 
+        public static UnityWebRequest GetRequest(string fullPath)
+        {
+            var fileUrl = "file:///" + fullPath;
+            var fileInfo = new FileInfo(fullPath);
+            var extension = fileInfo.Extension;
+            switch (extension)
+            {
+                case ".ogg":
+                    return UnityWebRequestMultimedia.GetAudioClip(fileUrl, AudioType.OGGVORBIS);
+                case ".mp3":
+                    return UnityWebRequestMultimedia.GetAudioClip(fileUrl, AudioType.MPEG);
+                case ".wav":
+                    return UnityWebRequestMultimedia.GetAudioClip(fileUrl, AudioType.WAV);
+                default:
+                    return UnityWebRequestMultimedia.GetAudioClip(fileUrl, AudioType.UNKNOWN);
+            }
+        }
+
         public static AudioClip LoadAudioClip(string name)
         {
             var fullPath = GetFullPath(name);
-            var fileUrl = "file:///" + fullPath;
-            var request = UnityWebRequestMultimedia.GetAudioClip(fileUrl, AudioType.OGGVORBIS);
-            
+            var request = GetRequest(fullPath);
+
             AudioClip loadedAudio = null;
             var task = request.SendWebRequest();
             
