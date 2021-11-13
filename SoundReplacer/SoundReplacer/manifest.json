@@ -3,7 +3,7 @@
   "id": "SoundReplacer",
   "name": "SoundReplacer",
   "author": "Otiosum",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Easily replace in-game sounds",
   "gameVersion": "1.18.1",
   "dependsOn": {

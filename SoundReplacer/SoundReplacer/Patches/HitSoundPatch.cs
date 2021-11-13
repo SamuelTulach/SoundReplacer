@@ -78,7 +78,7 @@ namespace SoundReplacer.Patches
                     ____longCutEffectsAudioClips = new AudioClip[] { SoundLoader.GetEmptyClip() };
                     ____shortCutEffectsAudioClips = new AudioClip[] { SoundLoader.GetEmptyClip() };
                 }
-                else if (Plugin.CurrentConfig.BadHitSound == "Default")
+                else if (Plugin.CurrentConfig.GoodHitSound == "Default")
                 {
                     ____shortCutEffectsAudioClips = _originalGoodShortSounds.ToArray();
                     ____longCutEffectsAudioClips = _originalGoodLongSounds.ToArray();
