@@ -16,6 +16,13 @@ namespace SoundReplacer.Patches
         private static AudioClip _lastFailClip;
         private static string _lastFailSelected;
 
+        public static void DummyCallback()
+        {
+            /**/
+        }
+
+        private static readonly Action DummyAction = new Action(DummyCallback);
+
         [HarmonyPatch(typeof(ResultsViewController))]
         [HarmonyPatch("DidActivate", MethodType.Normal)]
         public class DidActivatePatch
@@ -43,7 +50,7 @@ namespace SoundReplacer.Patches
                             desiredSuccessClip = _lastSuccessClip;
                         }
 
-                        ____songPreviewPlayer.CrossfadeTo(desiredSuccessClip, 0f, 0f, Math.Min(desiredSuccessClip.length, 20.0f));
+                        ____songPreviewPlayer.CrossfadeTo(desiredSuccessClip, 0f, 0f, Math.Min(desiredSuccessClip.length, 20.0f), DummyAction);
                     }
                 }
 
@@ -65,7 +72,7 @@ namespace SoundReplacer.Patches
                             desiredFailClip = _lastFailClip;
                         }
 
-                        ____songPreviewPlayer.CrossfadeTo(desiredFailClip, 0f, 0f, Math.Min(desiredFailClip.length, 20.0f));
+                        ____songPreviewPlayer.CrossfadeTo(desiredFailClip, 0f, 0f, Math.Min(desiredFailClip.length, 20.0f), DummyAction);
                     }
                 }
             }
