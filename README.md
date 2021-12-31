@@ -9,7 +9,7 @@ A BSIPA compatible mod that can change following in-game sounds:
 ![screenshot](screenshot.png)
 
 ## Installation
-Make sure that you have core mods installed with [ModAssistant](https://github.com/Assistant/ModAssistant) (BSIPA, Harmony, BSML). Go to the [releases page](https://github.com/SamuelTulach/SoundReplacer/releases) and download the latest build (or build compatible with your Beat Saber version). Extract the zip file and move the DLL file into plugins folder located in Beat Saber install directory.
+Make sure that you have core mods installed with [ModAssistant](https://github.com/Assistant/ModAssistant) (BSIPA, BSML). Go to the [releases page](https://github.com/SamuelTulach/SoundReplacer/releases) and download the latest build (or build compatible with your Beat Saber version). Extract the zip file and move the DLL file into plugins folder located in Beat Saber install directory.
 
 ## Usage
 First, you will need to find sounds that you want to use. They have to be in OGG/MPEG/WAV format. Please note that certain sounds should have offset, otherwise it might seem like the sound is played before the action happens. To download ready to use sounds, check out [BSMG discord's](https://discord.gg/beatsabermods) #game-sounds section.
