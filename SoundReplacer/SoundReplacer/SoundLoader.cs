@@ -37,14 +37,14 @@ namespace SoundReplacer
             }
         }
 
-        public static string GetFullPath(string name)
+        private static string GetFullPath(string name)
         {
             var path = Environment.CurrentDirectory + "\\UserData\\SoundReplacer\\" + name;
             var fileInfo = new FileInfo(path);
             return fileInfo.FullName;
         }
 
-        public static UnityWebRequest GetRequest(string fullPath)
+        private static UnityWebRequest GetRequest(string fullPath)
         {
             var fileUrl = "file:///" + fullPath;
             var fileInfo = new FileInfo(fullPath);
@@ -62,6 +62,23 @@ namespace SoundReplacer
             }
         }
 
+        private static void ReplaceMissing(string name)
+        {
+            const string text = "Default";
+            if (Plugin.CurrentConfig.GoodHitSound == name)
+                Plugin.CurrentConfig.GoodHitSound = text;
+            if (Plugin.CurrentConfig.BadHitSound == name)
+                Plugin.CurrentConfig.BadHitSound = text;
+            if (Plugin.CurrentConfig.ClickSound == name)
+                Plugin.CurrentConfig.ClickSound = text;
+            if (Plugin.CurrentConfig.FailSound == name)
+                Plugin.CurrentConfig.FailSound = text;
+            if (Plugin.CurrentConfig.SuccessSound == name)
+                Plugin.CurrentConfig.SuccessSound = text;
+            if (Plugin.CurrentConfig.MenuMusic == name)
+                Plugin.CurrentConfig.MenuMusic = text;
+        }
+
         public static AudioClip LoadAudioClip(string name)
         {
             var fullPath = GetFullPath(name);
@@ -75,11 +92,14 @@ namespace SoundReplacer
             // basically instant success or error
             while (!task.isDone) { }
 
-            if (request.isNetworkError)
-                Plugin.Log.Error("Failed to load audio: " + request.error);
-            else
-                loadedAudio = DownloadHandlerAudioClip.GetContent(request);
+            if (request.isNetworkError || request.isHttpError)
+            {
+                Plugin.Log.Error($"Failed to load file {name} with error {request.error}");
+                ReplaceMissing(name);
+                return GetEmptyClip();
+            }
 
+            loadedAudio = DownloadHandlerAudioClip.GetContent(request);
             return loadedAudio;
         }
 
